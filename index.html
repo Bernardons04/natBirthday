@@ -3,19 +3,27 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Feliz Aniversário!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <style>
         body {
             margin: 0;
-            height: 100vh;
+            height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #ff6f91, #ffcc5c);
+            overflow: hidden;
+        }
+
+        html {
+            height: 100dvh;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
         }
 
@@ -55,7 +63,10 @@
         }
 
         #celebration {
-            display: none;
+            display: flex;
+            /* Isso precisa estar sempre ativado, mesmo antes do JS */
+            visibility: hidden;
+            opacity: 0;
             position: fixed;
             top: 0;
             left: 0;
@@ -69,6 +80,11 @@
             z-index: 100;
         }
 
+        #celebration.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
         #celebration h2 {
             font-size: 4rem;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
@@ -78,6 +94,8 @@
 
         #cake {
             width: 350px;
+            max-width: 90vw;
+            height: auto;
             /* animation: spin 5s linear infinite; */
         }
 
@@ -93,6 +111,8 @@
         .scrolling-image {
             position: absolute;
             width: 100px;
+            max-width: 120px;
+            max-height: 120px;
             opacity: 0.9;
             animation: scrollUp 10s linear infinite;
             border-radius: 24px;
@@ -208,7 +228,7 @@
                 button.style.transform = ''; // Reset transform to avoid conflicts
             } else {
                 container.style.display = 'none';
-                celebration.style.display = 'flex';
+                celebration.classList.add('active');
                 startConfetti();
                 startImageScroll();
             }
